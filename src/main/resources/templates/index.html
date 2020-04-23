@@ -28,6 +28,7 @@
 
     <!-- Custom Theme Style -->
     <link th:href="@{/assets/css/custom.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/index.css}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -44,11 +45,12 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img th:src="@{/assets/images/img.jpg}" alt="..." class="img-circle profile_img">
+                <img th:if="${user.role.role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="..." class="img-circle profile_img">
+                <img th:if="${user.role.role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>欢迎</span>
-                <h2>管理员</h2>
+                <h2 th:text="${user.nickname}  ?: ${user.username}"></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -61,9 +63,20 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> 首页 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li data-url="/user/profile" class="active"><a>个人信息</a></li>
+                      <li data-url="/user/list"><a>用户管理</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> 在线学习 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">General Form</a></li>
+                      <li><a href="form_advanced.html">Advanced Components</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> 在线测评 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="general_elements.html">General Elements</a></li>
+                      <li><a href="media_gallery.html">Media Gallery</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -84,12 +97,13 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img th:src="@{/assets/images/img.jpg}" alt="">管理员
+                    <img th:if="${user.role.role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="">
+                    <img th:if="${user.role.role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="">
+                    <span th:text="${user.nickname} ?: ${user.username}"></span>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> 修改密码</a>
-                      <a class="dropdown-item"  href="javascript:;"> 个人档案</a>
-                     <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a>
+                     <a class="dropdown-item"  href="javascript:;"> 修改密码</a>
+                     <a class="dropdown-item"  id="logout"><i class="fa fa-sign-out pull-right"></i> 退出</a>
                   </div>
                 </li>
               </ul>
@@ -99,7 +113,7 @@
         <!-- /top navigation -->
 
         <!-- page content 内容区域 -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" id="main">
           内容区域
 
         </div>
@@ -156,6 +170,6 @@
 
     <!-- Custom Theme Scripts -->
     <script th:src="@{/assets/js/custom.min.js}"></script>
-	
+    <script th:src="@{/assets/js/index.js}"></script>
   </body>
 </html>

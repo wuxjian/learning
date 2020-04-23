@@ -11,6 +11,7 @@ import the.school.learning.common.vo.UserVo;
 import the.school.learning.service.SysService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
@@ -43,4 +44,10 @@ public class SysController {
     public String register() {
         return "register";
     }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+    }
+
 }

@@ -1,6 +1,5 @@
 $(function () {
     $('#login').click(function () {
-        debugger;
         var username = $('input[name="username"]').val();
         var password = $('input[name="password"]').val();
         if (!username) {

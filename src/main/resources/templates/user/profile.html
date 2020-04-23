@@ -1,0 +1,56 @@
+<div class="" xmlns:th="http://www.thymeleaf.org">
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 ">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>用户信息</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="col-md-3 col-sm-3  profile_left">
+            <div class="profile_img">
+              <div id="crop-avatar">
+                <!-- Current avatar -->
+                <img style="width: 300px; height: 300px" class="img-responsive avatar-view" th:if="${user.role.role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="Avatar" title="Change the avatar">
+                <img style="width: 300px; height: 300px" class="img-responsive avatar-view" th:if="${user.role.role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="Avatar" title="Change the avatar">
+              </div>
+            </div>
+            <h3 th:text="${user.nickname}"></h3>
+
+            <ul class="list-unstyled user_data">
+              <li>
+                <i class="fa fa-user user-profile-icon"></i> 用户名: <span th:text="${user.username}"></span>
+              </li>
+              <li>
+                <i class="fa fa-certificate user-profile-icon"></i>
+                  角色:
+                <span th:if="${user.role.role eq '1'}">管理员</span>
+                <span th:if="${user.role.role eq '2'}">普通用户</span>
+              </li>
+
+              <li>
+                <i class="fa fa-cloud user-profile-icon"></i>
+                年龄 <span th:text="${user.age}"></span>
+              </li>
+
+              <li>
+                <i class="fa fa-briefcase user-profile-icon"></i>
+                性别
+                <span th:if="${user.sex} eq '1'">男</span>
+                <span th:if="${user.sex} eq '2'">女</span>
+              </li>
+            </ul>
+
+            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>修改用户信息</a>
+            <br />
+            <!-- start skills -->
+            <!-- end of skills -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
