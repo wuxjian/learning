@@ -1,6 +1,6 @@
 var app = {
     global: {
-        currentUrl: '/user/profile'
+        currentUrl: '/user/profile.html'
     },
     init: function () {
         this.initBinding();

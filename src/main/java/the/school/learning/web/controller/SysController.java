@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import the.school.learning.common.constant.Constant;
 import the.school.learning.common.result.Result;
-import the.school.learning.common.vo.UserVo;
+import the.school.learning.common.vo.UserRoleVo;
 import the.school.learning.service.SysService;
 
 import javax.annotation.Resource;
@@ -26,9 +26,9 @@ public class SysController {
     @PostMapping("/login")
     @ResponseBody
     public Result login(String username, String password, HttpSession session) {
-        UserVo userVo = sysService.login(username, password);
-        if (Objects.nonNull(userVo)) {
-            session.setAttribute(Constant.SESSION_USER, userVo);
+        UserRoleVo userRoleVo = sysService.login(username, password);
+        if (Objects.nonNull(userRoleVo)) {
+            session.setAttribute(Constant.SESSION_USER, userRoleVo);
             return Result.success();
         }
         return Result.error("用户名或密码错误");

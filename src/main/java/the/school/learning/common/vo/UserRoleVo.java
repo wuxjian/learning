@@ -1,6 +1,9 @@
 package the.school.learning.common.vo;
 
-public class UserVo {
+
+import the.school.learning.entity.Role;
+
+public class UserRoleVo {
     /**
      * 主键
      */
@@ -36,7 +39,7 @@ public class UserVo {
      */
     private String enabled;
 
-    private String role;
+    private Role role;
 
     public Integer getId() {
         return id;
@@ -94,11 +97,11 @@ public class UserVo {
         this.enabled = enabled;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

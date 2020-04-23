@@ -132,4 +132,30 @@
     from user
     where username = #{username}
   </select>
+
+  <resultMap id="UserRoleResultMap" type="the.school.learning.common.vo.UserVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="log_time" jdbcType="VARCHAR" property="logTime" />
+    <result column="enabled" jdbcType="CHAR" property="enabled" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+
+  <select id="selectByPage" resultMap="UserRoleResultMap">
+    select
+    t1.*,
+    t3.role
+    from user t1
+    inner join user_role t2 on t1.id = t2.user_id
+	inner join role t3 on t2.role_id = t3.id
+    limit #{limit} offset #{offset}
+  </select>
+
+  <select id="selectCount" resultType="int">
+    select count(1)
+    from user
+  </select>
 </mapper>

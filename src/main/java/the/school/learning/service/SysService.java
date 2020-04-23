@@ -2,8 +2,10 @@ package the.school.learning.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import the.school.learning.common.result.Page;
 import the.school.learning.common.utils.DateUtils;
 import the.school.learning.common.utils.MD5;
+import the.school.learning.common.vo.UserRoleVo;
 import the.school.learning.common.vo.UserVo;
 import the.school.learning.entity.Role;
 import the.school.learning.entity.User;
@@ -11,6 +13,7 @@ import the.school.learning.mapper.RoleMapper;
 import the.school.learning.mapper.UserMapper;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SysService {
@@ -19,7 +22,7 @@ public class SysService {
     @Resource
     private RoleMapper roleMapper;
 
-    public UserVo login(String username, String password) {
+    public UserRoleVo login(String username, String password) {
         User user = this.userMapper.selectByUsername(username);
         if (user == null) {
             return null;
@@ -32,11 +35,11 @@ public class SysService {
         userMapper.updateByPrimaryKeySelective(user);
 
         Role role = roleMapper.selectRoleByUserId(user.getId());
-        UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(user, userVo);
-        userVo.setRole(role);
+        UserRoleVo userRoleVo = new UserRoleVo();
+        BeanUtils.copyProperties(user, userRoleVo);
+        userRoleVo.setRole(role);
 
-        return userVo;
+        return userRoleVo;
     }
 
 }
