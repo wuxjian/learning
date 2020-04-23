@@ -29,6 +29,7 @@
     <!-- Custom Theme Style -->
     <link th:href="@{/assets/css/custom.min.css}" rel="stylesheet">
     <link th:href="@{/assets/css/index.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   </head>
 
   <body class="nav-md">
@@ -69,8 +70,8 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> 在线学习 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#learn">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
+                      <li><a href="#article/list"> 资料管理 </a></li>
+                      <li><a href="form_advanced.html"> 在线学习 </a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> 在线测评 <span class="fa fa-chevron-down"></span></a>
@@ -169,6 +170,8 @@
     <script th:src="@{/assets/lib/bootstrap-daterangepicker/daterangepicker.js}"></script>
 
     <script th:src="@{/assets/lib/jqPaginator/jq-paginator.min.js}"></script>
+
+    <script th:src="@{/assets/lib/iziModal/iziModal.min.js}"></script>
 
     <!-- Custom Theme Scripts -->
     <script th:src="@{/assets/js/custom.min.js}"></script>
