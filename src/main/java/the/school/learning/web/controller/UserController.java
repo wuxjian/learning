@@ -1,4 +1,4 @@
-package the.school.learning.controller;
+package the.school.learning.web.controller;
 
 import org.springframework.stereotype.Controller;
 

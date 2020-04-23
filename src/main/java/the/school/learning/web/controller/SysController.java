@@ -1,6 +1,7 @@
-package the.school.learning.controller;
+package the.school.learning.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,23 @@ public class SysController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Result login(String username, String password,  HttpSession session) {
+    public Result login(String username, String password, HttpSession session) {
         UserVo userVo = sysService.login(username, password);
-        if (Objects.nonNull(userVo)){
+        if (Objects.nonNull(userVo)) {
             session.setAttribute(Constant.SESSION_USER, userVo);
             return Result.success();
         }
         return Result.error("用户名或密码错误");
     }
 
+
+    @GetMapping("/login.html")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/register.html")
+    public String register() {
+        return "register";
+    }
 }

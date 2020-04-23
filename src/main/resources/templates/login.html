@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>登录</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{assets/lib/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{assets/lib/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{assets/lib/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- Animate.css -->
+    <link th:href="@{assets/lib/animate.css/animate.min.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{assets/css/custom.min.css}" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+      <h1 style="text-align: center;margin-top: 30px">在线学习系统</h1>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>欢 迎 登 录</h1>
+              <div>
+                <input type="text" name="username" class="form-control" placeholder="用户名" required="" />
+              </div>
+              <div>
+                <input type="password" name="password" class="form-control" placeholder="密码" required="" />
+              </div>
+              <div>
+                <button id="login" type="button" class="btn btn-success " style="width: 350px">登录</button>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">
+                  <a href="/register.html" class="to_register"> 创建账号 </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <p>©2020 在线学习系统</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- jQuery -->
+  <script th:src="@{/assets/lib/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/assets/js/login.js}"></script>
+</html>
