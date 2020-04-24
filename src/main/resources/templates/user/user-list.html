@@ -1,8 +1,5 @@
 <div class="" xmlns:th="http://www.thymeleaf.org">
-  <h3>资料列表</h3>
-  <div style="text-align: right">
-    <button type="button" class="btn btn-success" id="insert">增加</button>
-  </div>
+  <h3>用户列表</h3>
   <table id="userTable" class="table table-striped table-bordered" style="width:100%">
     <thead>
     <tr>
@@ -18,5 +15,9 @@
 
     <tbody> </tbody>
   </table>
-  <script th:src="@{/assets/js/article/list.js}"></script>
+  <div class="page">
+    <ul id="paginator" class="pagination"></ul>
+  </div>
+
+  <script th:src="@{/assets/js/user/user-list.js}"></script>
 </div>

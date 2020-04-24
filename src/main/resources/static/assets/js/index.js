@@ -26,7 +26,14 @@ var app = {
     },
     //第一次加载
     firstLoad: function () {
-        $('#main').load('/user/profile.html');
+        var hash  = location.hash;
+        if (hash){
+            var url = '/' + hash.slice(1) + '.html';
+            $('#main').load(url);
+        }else {
+            $('#main').load('/user/profile.html');
+        }
+
     }
 
 }

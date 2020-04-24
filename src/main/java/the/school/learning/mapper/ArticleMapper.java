@@ -1,6 +1,9 @@
 package the.school.learning.mapper;
 
+import the.school.learning.common.vo.UserVo;
 import the.school.learning.entity.Article;
+
+import java.util.List;
 
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,8 @@ public interface ArticleMapper {
     int updateByPrimaryKeyWithBLOBs(Article record);
 
     int updateByPrimaryKey(Article record);
+
+    int selectCount();
+
+    List<UserVo> selectByPage(int limit, int offset);
 }

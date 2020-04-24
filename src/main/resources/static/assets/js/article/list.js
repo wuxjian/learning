@@ -1,5 +1,0 @@
-$(function () {
-    $('#insert').click(function () {
-
-    });
-});

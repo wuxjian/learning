@@ -10,6 +10,11 @@ public class Article implements Serializable {
     private Integer id;
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
      * 学科
      */
     private String subject;
@@ -32,6 +37,14 @@ public class Article implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSubject() {

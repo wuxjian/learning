@@ -1,6 +1,5 @@
 package the.school.learning.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +24,12 @@ public class UserController {
     public String profile(Model model, HttpSession session) {
         UserRoleVo userRoleVo = (UserRoleVo) session.getAttribute(Constant.SESSION_USER);
         model.addAttribute("user", userRoleVo);
-        return "user/profile";
+        return "user/user-profile";
     }
 
     @GetMapping("/list.html")
     public String list() {
-        return "user/list";
+        return "user/user-list";
     }
 
     @PostMapping("/list")
