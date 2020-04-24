@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import the.school.learning.common.result.Page;
 import the.school.learning.common.result.Result;
+import the.school.learning.common.utils.DateUtils;
 import the.school.learning.common.vo.ArticleUserVo;
 import the.school.learning.common.vo.UserVo;
 import the.school.learning.entity.Article;
@@ -39,6 +40,8 @@ public class ArticleLearnController {
     public String learning(Model model, Integer articleId) {
         Article article = this.articleService.detail(articleId);
         model.addAttribute("article", article);
+        model.addAttribute("startTime", DateUtils.now());
+        model.addAttribute("articleId", articleId);
         return "article-learn/article-learning";
     }
 

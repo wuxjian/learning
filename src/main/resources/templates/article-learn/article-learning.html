@@ -7,6 +7,8 @@
     <div class="title_right">
       <div class="col-md-5 col-sm-5   form-group pull-right top_search">
         <div class="input-group" style="position: relative">
+          <input type="hidden" name="startTime" th:value="${startTime}">
+          <input type="hidden" name="articleId" th:value="${articleId}">
           <button type="button" class="btn btn-success" style="position: absolute; right: 10px; top: 5px">结束学习</button>
         </div>
       </div>
@@ -19,7 +21,7 @@
     <div class="col-md-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2><span th:text="${article.title}"></span> <small th:text="${article.subject}"></small></h2>
+          <h2><span th:text="${article.title}" style="color: #000;"></span> <small th:text="${article.subject}"></small></h2>
           <div class="clearfix"></div>
         </div>
         <div class="x_content" th:utext="${article.content}">
