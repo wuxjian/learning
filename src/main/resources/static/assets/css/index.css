@@ -31,3 +31,10 @@
     border-color: #ddd;
     cursor: not-allowed;
 }
+
+#main {
+    overflow-y: auto;
+}
+.nav_menu {
+    margin-bottom: 0;
+}

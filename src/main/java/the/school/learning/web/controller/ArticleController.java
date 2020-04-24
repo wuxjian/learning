@@ -1,6 +1,7 @@
 package the.school.learning.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import the.school.learning.common.result.Page;
 import the.school.learning.common.result.Result;
@@ -32,6 +33,12 @@ public class ArticleController {
     public String add() {
         return "article/article-add";
     }
+    @GetMapping("/preview.html")
+    public String preview(Model model, Integer id) {
+        Article article = this.service.detail(id);
+        model.addAttribute("article", article);
+        return "article/article-preview";
+    }
 
 
     @PostMapping("/list")
@@ -47,8 +54,16 @@ public class ArticleController {
 
     @PostMapping("/toggleStatus")
     @ResponseBody
-    public void toggleStatus(Integer id) {
+    public Result toggleStatus(Integer id) {
         this.service.toggleStatus(id);
+        return Result.success();
+    }
+
+    @PostMapping("/detail")
+    @ResponseBody
+    public Result detail(Integer id) {
+        Article article = this.service.detail(id);
+        return Result.success(article);
     }
 
 }

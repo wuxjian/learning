@@ -1,0 +1,11 @@
+<div class="" xmlns:th="http://www.thymeleaf.org">
+    <div class="col-md-9 col-sm-9 ">
+        <h2>
+            <i class="fa fa-book"></i><span>标题：</span><span th:text="${article.title}"></span>
+        </h2>
+        <h2>
+            <i class="fa fa-bookmark"></i><span>学科：</span><span th:text="${article.subject}"></span>
+        </h2>
+        <div th:utext="${article.content}"></div>
+    </div>
+</div>

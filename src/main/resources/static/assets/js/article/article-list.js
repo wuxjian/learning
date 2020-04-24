@@ -3,24 +3,36 @@ $(function () {
         location.hash = 'article/add';
     });
 
-    /*$('#articleTable').delegate('.toggle-status', 'click', function () {
-        var id = $(this).parent('tr').attr('data-id');
+    //toggle event
+    $('#articleTable').delegate('.toggle-status', 'click', function () {
+        var id = $(this).parents('tr').attr('data-id');
         $.post('/article/toggleStatus', {id: id}, function (res) {
             if (res.code === 0){
                 alert("success");
                 getArticleList(1);
             }
         })
-    });*/
+    });
+    //preview
+    $('#articleTable').delegate('.preview', 'click', function () {
+        var id = $(this).parents('tr').attr('data-id');
+        $.get('/article/preview.html?id=' + id, function (res) {
+            $('#modal').empty().append(res).modal({
+                showClose: false
+            });
+        })
+    });
 
-    var pageSize = 10;
 
-    getArticleList(1);
+    var pageSize = 5;
+    var page = 1;
 
+
+    getArticleList(page);
     function getArticleList(currentPage) {
         $.post('/article/list', {page: currentPage, size: pageSize}, function (res) {
             if (res.code === 0) {
-                var $tbody =$('#userTable tbody');
+                var $tbody =$('#articleTable tbody');
                 $tbody.empty();
                 if (res.data.totalRecord){
                     for (var i = 0; i < res.data.list.length; i++) {
@@ -35,13 +47,14 @@ $(function () {
                                         '<button class="btn btn-primary btn-sm toggle-status">' + action + '</button>' +
                                         '<button class="btn btn-info btn-sm">编辑</button>' +
                                         '<button class="btn btn-danger btn-sm">删除</button>' +
-                                        '<button class="btn btn-success btn-sm">预览</button>' +
+                                        '<button class="btn btn-success btn-sm preview">预览</button>' +
                                     '</td>' +
                             '      </tr>';
                         $tbody.append($tr);
                     }
 
                 }
+                page = currentPage;
                 paginator(res.data.totalRecord, currentPage);
             }
         })

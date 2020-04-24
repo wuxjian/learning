@@ -38,4 +38,8 @@ public class ArticleService {
         }
         this.articleMapper.updateByPrimaryKeySelective(article);
     }
+
+    public Article detail(Integer id) {
+        return this.articleMapper.selectByPrimaryKey(id);
+    }
 }
