@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import the.school.learning.common.constant.Constant;
 import the.school.learning.common.result.Page;
 import the.school.learning.common.result.Result;
+import the.school.learning.common.utils.UserUtils;
 import the.school.learning.common.vo.UserRoleVo;
 import the.school.learning.common.vo.UserVo;
 import the.school.learning.service.UserService;
@@ -21,9 +22,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/profile.html")
-    public String profile(Model model, HttpSession session) {
-        UserRoleVo userRoleVo = (UserRoleVo) session.getAttribute(Constant.SESSION_USER);
-        model.addAttribute("user", userRoleVo);
+    public String profile(Model model) {
+        model.addAttribute("user", UserUtils.getCurrentUser());
         return "user/user-profile";
     }
 

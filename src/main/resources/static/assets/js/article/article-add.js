@@ -5,7 +5,6 @@ $(function () {
     editor2.create();
 
     $('#submitArticle').click(function () {
-        debugger;
         var title =$('input[name="title"]').val();
         var subject =$('select[name="subject"]').val();
         if (!title) {

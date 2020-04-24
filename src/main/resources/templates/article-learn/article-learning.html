@@ -1,0 +1,33 @@
+<div class="" xmlns:th="http://www.thymeleaf.org">
+  <div class="page-title" style="background-color: #fff; border-radius: 5px;color: #000;padding: 0 20px;line-height: 65px">
+    <div class="title_left">
+      <h3>在线学习</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+        <div class="input-group" style="position: relative">
+          <button type="button" class="btn btn-success" style="position: absolute; right: 10px; top: 5px">结束学习</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><span th:text="${article.title}"></span> <small th:text="${article.subject}"></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content" th:utext="${article.content}">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script th:src="@{/assets/js/article-learn/article-learning.js}"></script>
+</div>

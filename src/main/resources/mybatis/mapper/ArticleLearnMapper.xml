@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="the.school.learning.mapper.ArticleLearnMapper">
+  <resultMap id="BaseResultMap" type="the.school.learning.entity.ArticleLearn">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="last_learn_time" jdbcType="VARCHAR" property="lastLearnTime" />
+    <result column="learn_count" jdbcType="INTEGER" property="learnCount" />
+    <result column="learn_times" jdbcType="INTEGER" property="learnTimes" />
+    <result column="enabled" jdbcType="CHAR" property="enabled" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, last_learn_time, learn_count, learn_times, enabled, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article_learn
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article_learn
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="the.school.learning.entity.ArticleLearn">
+    insert into article_learn (id, article_id, last_learn_time, 
+      learn_count, learn_times, enabled, 
+      user_id)
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, #{lastLearnTime,jdbcType=VARCHAR}, 
+      #{learnCount,jdbcType=INTEGER}, #{learnTimes,jdbcType=INTEGER}, #{enabled,jdbcType=CHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="the.school.learning.entity.ArticleLearn">
+    insert into article_learn
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="lastLearnTime != null">
+        last_learn_time,
+      </if>
+      <if test="learnCount != null">
+        learn_count,
+      </if>
+      <if test="learnTimes != null">
+        learn_times,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="lastLearnTime != null">
+        #{lastLearnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="learnCount != null">
+        #{learnCount,jdbcType=INTEGER},
+      </if>
+      <if test="learnTimes != null">
+        #{learnTimes,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="the.school.learning.entity.ArticleLearn">
+    update article_learn
+    <set>
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="lastLearnTime != null">
+        last_learn_time = #{lastLearnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="learnCount != null">
+        learn_count = #{learnCount,jdbcType=INTEGER},
+      </if>
+      <if test="learnTimes != null">
+        learn_times = #{learnTimes,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="the.school.learning.entity.ArticleLearn">
+    update article_learn
+    set article_id = #{articleId,jdbcType=INTEGER},
+      last_learn_time = #{lastLearnTime,jdbcType=VARCHAR},
+      learn_count = #{learnCount,jdbcType=INTEGER},
+      learn_times = #{learnTimes,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByArticleIdAndUserId" resultMap="BaseResultMap">
+    select *
+    from article_learn
+    where article_id = #{articleId} and user_id = #{uesrId}
+  </select>
+
+  <resultMap id="ArticleUserMapper" type="the.school.learning.common.vo.ArticleUserVo">
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+
+  <select id="selectArticlePage" resultMap="ArticleUserMapper">
+    select
+    t1.id article_id,
+    t1.title,
+    t1.subject,
+    t3.user_id
+    from article t1
+    left join (
+        select t1.article_id, t1.user_id
+        from article_learn t1
+        inner join user t2 on t1.user_id = t2.id
+		where t1.user_id = #{userId}
+    )t3 on t1.id = t3.article_id
+    where t1.status = '2'
+    order by t1.id desc
+    limit #{limit} offset #{offset}
+  </select>
+
+  <select id="selectCount" resultType="int">
+    select count(1)
+    from article
+    where status = '2'
+  </select>
+</mapper>

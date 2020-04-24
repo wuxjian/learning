@@ -4,14 +4,11 @@ var app = {
     },
     init: function () {
         this.initBinding();
-        this.firstLoad();
+        this.loadUrl();
     },
     initBinding: function () {
         window.onhashchange=function(event){
-            var newURL = event.newURL;
-            var hash = newURL.substring(newURL.lastIndexOf("#") + 1);
-            var url = '/' + hash + '.html';
-            $('#main').load(url);
+            app.loadUrl();
         };
         $('#logout').click(function () {
             $.get('/logout');
@@ -24,12 +21,19 @@ var app = {
         });
 
     },
-    //第一次加载
-    firstLoad: function () {
+    loadUrl: function () {
         var hash  = location.hash;
         if (hash){
-            var url = '/' + hash.slice(1) + '.html';
-            $('#main').load(url);
+            hash = hash.slice(1);
+            var queryIndex = hash.indexOf("?")
+            if (queryIndex === - 1){
+                var url = '/' + hash + '.html';
+                $('#main').load(url);
+            }else {
+                var url = '/' + hash.substring(0, queryIndex) + '.html' + hash.substring(queryIndex);
+                $('#main').load(url);
+            }
+
         }else {
             $('#main').load('/user/profile.html');
         }
