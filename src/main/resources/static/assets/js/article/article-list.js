@@ -3,24 +3,40 @@ $(function () {
         location.hash = 'article/add';
     });
 
+    /*$('#articleTable').delegate('.toggle-status', 'click', function () {
+        var id = $(this).parent('tr').attr('data-id');
+        $.post('/article/toggleStatus', {id: id}, function (res) {
+            if (res.code === 0){
+                alert("success");
+                getArticleList(1);
+            }
+        })
+    });*/
+
     var pageSize = 10;
 
     getArticleList(1);
 
     function getArticleList(currentPage) {
         $.post('/article/list', {page: currentPage, size: pageSize}, function (res) {
-            debugger;
             if (res.code === 0) {
                 var $tbody =$('#userTable tbody');
                 $tbody.empty();
                 if (res.data.totalRecord){
                     for (var i = 0; i < res.data.list.length; i++) {
                         var item = res.data.list[i];
-                        var $tr = '<tr>' +
+                        var action = item.status === '1' ? "发布": "撤消";
+                        var $tr = '<tr data-id="' + item.id + '">' +
                             '        <td>' + (i + 1) + '</td>' +
                             '        <td>'+ item.title +'</td>' +
                             '        <td>'+ item.subject +'</td>' +
                             '        <td>'+ (item.status  === '1' ? '草稿' : '已发布')  +'</td>' +
+                            '        <td>'+
+                                        '<button class="btn btn-primary btn-sm toggle-status">' + action + '</button>' +
+                                        '<button class="btn btn-info btn-sm">编辑</button>' +
+                                        '<button class="btn btn-danger btn-sm">删除</button>' +
+                                        '<button class="btn btn-success btn-sm">预览</button>' +
+                                    '</td>' +
                             '      </tr>';
                         $tbody.append($tr);
                     }

@@ -44,4 +44,11 @@ public class ArticleController {
         Page<UserVo> result = this.service.selectByPage(param);
         return Result.success(result);
     }
+
+    @PostMapping("/toggleStatus")
+    @ResponseBody
+    public void toggleStatus(Integer id) {
+        this.service.toggleStatus(id);
+    }
+
 }

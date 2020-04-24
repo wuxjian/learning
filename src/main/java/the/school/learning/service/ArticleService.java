@@ -28,4 +28,14 @@ public class ArticleService {
         page.setList(list);
         return page;
     }
+
+    public void toggleStatus(Integer id) {
+        Article article = this.articleMapper.selectByPrimaryKey(id);
+        if (article.getStatus().equals("1")) {
+            article.setStatus("2");
+        }else {
+            article.setStatus("1");
+        }
+        this.articleMapper.updateByPrimaryKeySelective(article);
+    }
 }
