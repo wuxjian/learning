@@ -7,9 +7,7 @@ import the.school.learning.common.result.Page;
 import the.school.learning.common.result.Result;
 import the.school.learning.common.utils.DateUtils;
 import the.school.learning.common.vo.ArticleUserVo;
-import the.school.learning.common.vo.UserVo;
 import the.school.learning.entity.Article;
-import the.school.learning.entity.ArticleLearn;
 import the.school.learning.entity.ArticleLearnItems;
 import the.school.learning.service.ArticleLearnService;
 import the.school.learning.service.ArticleService;
@@ -35,6 +33,8 @@ public class ArticleLearnController {
     public String list() {
         return "article-learn/article-learn-list";
     }
+
+
 
     @GetMapping("/learning.html")
     public String learning(Model model, Integer articleId) {

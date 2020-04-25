@@ -27,6 +27,16 @@ public class ArticleLearnItems implements Serializable {
      */
     private String endTime;
 
+    /**
+     * 本次时长 分钟
+     */
+    private Integer times;
+
+    /**
+     * 用户id
+     */
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -59,5 +69,21 @@ public class ArticleLearnItems implements Serializable {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

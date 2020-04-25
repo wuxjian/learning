@@ -2,7 +2,6 @@ $(function () {
 
     //begin learn
     $('#articleLearnTable').delegate('.begin-learn', 'click', function () {
-        debugger;
         var id = $(this).parents('tr').attr('data-id');
         location.hash = 'article/learn/learning?articleId=' + id;
     });
@@ -19,13 +18,14 @@ $(function () {
                 if (res.data.totalRecord){
                     for (var i = 0; i < res.data.list.length; i++) {
                         var item = res.data.list[i];
-                        var action = item.userId ? '继续学习' : '开始学习';
+                        var button = item.userId ? '<button class="btn btn-success btn-sm begin-learn">再次学习</button>'
+                            : '<button class="btn btn-primary btn-sm begin-learn">开始学习</button>';
                         var $tr = '<tr data-id="' + item.articleId + '">' +
                             '        <td>' + (i + 1) + '</td>' +
                             '        <td>'+ item.subject +'</td>' +
                             '        <td>'+ item.title +'</td>' +
                             '        <td>'+ (item.userId ? '是' : '否')  +'</td>' +
-                            '        <td>'+ '<button class="btn btn-success btn-sm begin-learn">' + action + '</button>' +'</td>' +
+                            '        <td>'+ button +'</td>' +
                             '      </tr>';
                         $tbody.append($tr);
                     }

@@ -1,6 +1,7 @@
 package the.school.learning.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import the.school.learning.common.vo.ArticleLearnRecordVo;
 import the.school.learning.common.vo.ArticleUserVo;
 import the.school.learning.entity.ArticleLearn;
 
@@ -19,10 +20,15 @@ public interface ArticleLearnMapper {
 
     int updateByPrimaryKey(ArticleLearn record);
 
-    ArticleLearn selectByArticleIdAndUserId(@Param("articleId") Integer articleId, @Param("articleId") Integer userId);
+    ArticleLearn selectByArticleIdAndUserId(@Param("articleId") Integer articleId, @Param("userId") Integer userId);
 
     List<ArticleUserVo> selectArticlePage(Integer userId, @Param("limit") Integer limit,
                                           @Param("offset") Integer offset);
 
     int selectCount();
+
+    int selectRecordCount(Integer userId);
+
+    List<ArticleLearnRecordVo> selectArticleRecordPage(Integer userId, @Param("limit") Integer limit,
+                                                       @Param("offset") Integer offset);
 }

@@ -27,7 +27,7 @@ public class DateUtils {
         if (Objects.isNull(dateStr)) {
             return null;
         }
-        DateFormat format = new SimpleDateFormat(dateStr);
+        DateFormat format = new SimpleDateFormat(dateFormat);
         try {
             return format.parse(dateStr);
         } catch (ParseException e) {

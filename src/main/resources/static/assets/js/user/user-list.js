@@ -5,7 +5,6 @@ $(function () {
 
     function getUserList(currentPage) {
         $.post('/user/list', {page: currentPage, size: pageSize}, function (res) {
-            debugger;
             if (res.code === 0) {
                 var $tbody =$('#userTable tbody');
                 $tbody.empty();
