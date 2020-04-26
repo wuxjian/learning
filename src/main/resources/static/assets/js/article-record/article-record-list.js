@@ -8,7 +8,15 @@ $(function () {
         renderChart($(this).attr('data-counts'));
     });
 
-    renderChart(7);
+    var hasRender = false;
+
+    $('#chart-tab').click(function () {
+        if (!hasRender) {
+            renderChart(7);
+        }
+        hasRender = true;
+    });
+
 
     function renderChart(recentCounts) {
 
