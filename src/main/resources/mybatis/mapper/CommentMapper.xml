@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="the.school.learning.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="the.school.learning.entity.Comment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="the.school.learning.entity.Comment">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, subject, user_id, `status`, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="the.school.learning.entity.Comment">
+    insert into comment (id, title, subject, 
+      user_id, `status`, create_time, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="the.school.learning.entity.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="the.school.learning.entity.Comment">
+    update comment
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="the.school.learning.entity.Comment">
+    update comment
+    set title = #{title,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="the.school.learning.entity.Comment">
+    update comment
+    set title = #{title,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCommentCount" resultType="int">
+    select count(1)
+    from comment
+  </select>
+
+
+  <resultMap id="CommentPageResultMap" type="the.school.learning.common.vo.CommentVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="reply_count" jdbcType="INTEGER" property="replyCount" />
+    <result column="last_reply" jdbcType="VARCHAR" property="lastReply" />
+    <result column="last_reply_id" jdbcType="INTEGER" property="lastReplyId" />
+    <result column="last_reply_time" jdbcType="VARCHAR" property="lastReplyTime" />
+  </resultMap>
+
+  <select id="selectCommentByPage" resultMap="CommentPageResultMap">
+    select
+    t1.id,
+    t1.subject,
+    t1.title,
+    t1.user_id author_id,
+    t4.nickname author,
+    t1.status,
+    t1.create_time,
+    t2.last_reply_id,
+    t2.last_reply,
+    t2.last_reply_time,
+    t3.reply_count
+    from comment t1
+    left join (
+        select
+        t1.comment_id,
+        t1.user_id last_reply_id,
+        t2.nickname last_reply,
+        t1.reply_time last_reply_time
+        from comment_reply t1
+        left join user t2 on t1.user_id = t2.id
+        order by t1.reply_time desc
+        limit 1
+    )t2 on t1.id = t2.comment_id
+
+    left join (
+        select
+        t1.comment_id,
+        count(1) reply_count
+        from comment_reply t1
+        GROUP BY t1.comment_id
+    ) t3 on t1.id = t3.comment_id
+    left join user t4 on t1.user_id = t4.id
+    order by t1.id desc
+    limit #{limit} offset #{offset}
+  </select>
+
+  <select id="selectCommentReplyCount" resultType="int">
+    select count(1)
+    from comment_reply
+    where comment_id = #{commentId}
+  </select>
+
+
+  <resultMap id="CommentReplyPageResultMap" type="the.school.learning.common.vo.CommentReplyVo">
+    <result column="reply_id" jdbcType="VARCHAR" property="replyId" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+  <select id="selectCommentReplyByPage" resultMap="CommentReplyPageResultMap">
+    select
+    t1.id reply_id,
+    t2.nickname author,
+    t1.reply_time create_time,
+    t1.content
+    from comment_reply t1
+    left join user t2 on t1.user_id = t2.id
+    where t1.comment_id = #{commentId}
+    order by t1.id asc
+    limit #{limit} offset #{offset}
+  </select>
+
+</mapper>

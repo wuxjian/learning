@@ -1,0 +1,107 @@
+<style>
+    #reply-list {
+        margin-bottom: 25px;
+    }
+
+    .reply-item {
+        border-bottom: 4px solid #C2D5E3;
+        display: flex;
+    }
+
+    .reply-item > div {
+        padding: 10px;
+    }
+
+    .reply-item .left {
+        display: flex;
+        flex-direction: column;
+        width: 160px;
+        background: #E5EDF2;
+        overflow: hidden;
+        border-right: 1px solid #C2D5E3;
+    }
+
+    .reply-item .left img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .reply-item .left .nickname {
+        margin-top: 20px;
+        font-weight: 700;
+    }
+    .reply-item .right {
+        padding: 0 20px;
+        flex: 1;
+    }
+    .reply-item .right .header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed #CDCDCD;
+        line-height: 40px;
+        height: 40px;
+    }
+    .author{
+        width: 13px;
+    }
+    .reply-wrapper {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        height: 300px;
+        border: 1px solid #ddd;
+    }
+    .reply-wrapper .left {
+        width: 160px;
+        background: #E5EDF2;
+        overflow: hidden;
+        border-right: 1px solid #C2D5E3;
+    }
+    .reply-wrapper .left img {
+        width: 140px;
+    }
+    .reply-wrapper .right {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+    .reply-wrapper .right #editor {
+        width: 100%;
+        flex: 1;
+    }
+    .toolbar {
+        border: 1px solid #ccc;
+    }
+    .text {
+        border: 1px solid #ccc;
+    }
+</style>
+
+<div class="" xmlns:th="http://www.thymeleaf.org">
+    <link th:href="@{/assets/lib/wangEditor/wangEditor.min.css}" rel="stylesheet">
+    <h3 th:text="'[' + ${comment.subject} + ']' + ${comment.title}"></h3>
+    <input type="hidden" name="commentId" th:value="${comment.id}">
+    <div id="reply-list">
+
+    </div>
+
+    <div class="page">
+        <ul id="paginator" class="pagination"></ul>
+    </div>
+    <div class="reply-wrapper">
+        <div class="left">
+            <img th:if="${role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="">
+            <img th:if="${role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="">
+        </div>
+        <div class="right">
+            <div id="toolbar" class="toolbar">
+            </div>
+            <div id="editor" class="text"> <!--可使用 min-height 实现编辑区域自动增加高度-->
+            </div>
+
+            <div><button class="btn btn-success" id="reply">参与回复</button></div>
+        </div>
+    </div>
+    <script th:src="@{/assets/lib/wangEditor/wangEditor.min.js}"></script>
+    <script th:src="@{/assets/js/comment/comment-reply-list.js}"></script>
+</div>
