@@ -26,4 +26,6 @@ public interface UserMapper {
     int selectCount();
 
     List<Integer> profileStatistic(Integer userId);
+
+    int checkUsernameExist(String username);
 }

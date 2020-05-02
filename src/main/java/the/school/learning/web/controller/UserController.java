@@ -9,6 +9,7 @@ import the.school.learning.common.utils.UserUtils;
 import the.school.learning.common.vo.ProfileVo;
 import the.school.learning.common.vo.UserRoleVo;
 import the.school.learning.common.vo.UserVo;
+import the.school.learning.entity.User;
 import the.school.learning.service.UserService;
 
 import javax.annotation.Resource;
@@ -62,4 +63,10 @@ public class UserController {
         return userService.toggleStatus(userId);
     }
 
+
+    @PostMapping("/register")
+    @ResponseBody
+    public Result register(User user) {
+        return userService.register(user);
+    }
 }

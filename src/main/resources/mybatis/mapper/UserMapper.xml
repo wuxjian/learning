@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="the.school.learning.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="the.school.learning.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="age" jdbcType="TINYINT" property="age" />
-    <result column="log_time" jdbcType="VARCHAR" property="logTime" />
-    <result column="enabled" jdbcType="CHAR" property="enabled" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="sex" jdbcType="CHAR" property="sex"/>
+    <result column="age" jdbcType="TINYINT" property="age"/>
+    <result column="log_time" jdbcType="VARCHAR" property="logTime"/>
+    <result column="enabled" jdbcType="CHAR" property="enabled"/>
   </resultMap>
   <sql id="Base_Column_List">
     id, username, nickname, `password`, sex, age, log_time, enabled
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -32,7 +32,7 @@
       #{password,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=TINYINT}, #{logTime,jdbcType=VARCHAR}, 
       #{enabled,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="the.school.learning.entity.User">
+  <insert id="insertSelective" parameterType="the.school.learning.entity.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -134,14 +134,14 @@
   </select>
 
   <resultMap id="UserRoleResultMap" type="the.school.learning.common.vo.UserVo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="age" jdbcType="TINYINT" property="age" />
-    <result column="log_time" jdbcType="VARCHAR" property="logTime" />
-    <result column="enabled" jdbcType="CHAR" property="enabled" />
-    <result column="role" jdbcType="VARCHAR" property="role" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+    <result column="sex" jdbcType="CHAR" property="sex"/>
+    <result column="age" jdbcType="TINYINT" property="age"/>
+    <result column="log_time" jdbcType="VARCHAR" property="logTime"/>
+    <result column="enabled" jdbcType="CHAR" property="enabled"/>
+    <result column="role" jdbcType="VARCHAR" property="role"/>
   </resultMap>
 
   <select id="selectByPage" resultMap="UserRoleResultMap">
@@ -179,5 +179,10 @@
     union all
 
     select count(1) val from comment_reply where user_id = #{userId}
+  </select>
+
+
+  <select id="checkUsernameExist" resultType="int">
+    select count(1) from user where username = #{username}
   </select>
 </mapper>
