@@ -158,4 +158,26 @@
     select count(1)
     from user
   </select>
+
+  <select id="profileStatistic" resultType="int">
+    select sum(learn_count) val
+    from article_learn t1
+    inner join article t2 on t1.article_id = t2.id
+    where t1.user_id = #{userId}
+
+    union all
+
+    select sum(learn_times) val
+    from article_learn t1
+    inner join article t2 on t1.article_id = t2.id
+    where user_id = #{userId}
+
+    union all
+
+    select count(1) val from comment where user_id = #{userId}
+
+    union all
+
+    select count(1) val from comment_reply where user_id = #{userId}
+  </select>
 </mapper>

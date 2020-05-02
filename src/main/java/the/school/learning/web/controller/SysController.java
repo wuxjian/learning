@@ -28,6 +28,9 @@ public class SysController {
     public Result login(String username, String password, HttpSession session) {
         UserRoleVo userRoleVo = sysService.login(username, password);
         if (Objects.nonNull(userRoleVo)) {
+            if (userRoleVo.getEnabled().equals(Constant.DISABLE)) {
+                return Result.error("账号已被禁用");
+            }
             session.setAttribute(Constant.SESSION_USER, userRoleVo);
             return Result.success();
         }

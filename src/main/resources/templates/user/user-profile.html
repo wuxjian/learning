@@ -1,3 +1,12 @@
+<style>
+  #table tr {
+    height: 60px;
+    line-height: 60px;
+  }
+  #table tr td {
+    width: 50%;
+  }
+</style>
 <div class="" xmlns:th="http://www.thymeleaf.org">
   <div class="clearfix"></div>
 
@@ -6,15 +15,16 @@
       <div class="x_panel">
         <div class="x_title">
           <h2>用户信息</h2>
+          <input type="hidden" th:value="${userId}" id="userId">
           <div class="clearfix"></div>
         </div>
-        <div class="x_content">
+        <div class="x_content" style="display: flex;flex-direction: row">
           <div class="col-md-3 col-sm-3  profile_left">
             <div class="profile_img">
               <div id="crop-avatar">
                 <!-- Current avatar -->
-                <img style="width: 300px; height: 300px" class="img-responsive avatar-view" th:if="${user.role.role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="Avatar" title="Change the avatar">
-                <img style="width: 300px; height: 300px" class="img-responsive avatar-view" th:if="${user.role.role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="Avatar" title="Change the avatar">
+                <img style="width: 100%;" class="img-responsive avatar-view" th:if="${user.role.role eq '1'}" th:src="@{/assets/images/1.jpeg}" alt="Avatar" title="Change the avatar">
+                <img style="width: 100%; height: 300px" class="img-responsive avatar-view" th:if="${user.role.role eq '2'}" th:src="@{/assets/images/2.jpeg}" alt="Avatar" title="Change the avatar">
               </div>
             </div>
             <h3 th:text="${user.nickname}"></h3>
@@ -43,14 +53,62 @@
               </li>
             </ul>
 
-            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>修改用户信息</a>
+<!--            <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>修改用户信息</a>-->
             <br />
             <!-- start skills -->
             <!-- end of skills -->
           </div>
+          <div class="statistic" style="flex: 1">
+            <ul class="nav nav-tabs bar_tabs" id="myTab" role="tablist" style="background-color: #fff">
+              <li class="nav-item">
+                <a class="nav-link active" id="list-tab" data-toggle="tab" href="#statistic" role="tab" aria-controls="list" aria-selected="true">统计</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="chart-tab" data-toggle="tab" href="#history-record" role="tab" aria-controls="chart" aria-selected="false">历史考试成绩</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="statistic" role="tabpanel" aria-labelledby="list-tab">
+                <div class="col-sm-5" >
+                  <table id="table" class="table table-striped table-bordered">
+                    <tr>
+                      <td>学习次数</td>
+                      <td id="learnCount"></td>
+                    </tr>
+                    <tr>
+                      <td>学习时间(min)</td>
+                      <td id="learnTimes"></td>
+                    </tr>
+                    <tr>
+                      <td>留言数</td>
+                      <td id="commentCount"></td>
+                    </tr>
+                    <tr>
+                      <td>回复数</td>
+                      <td id="commentReplyCount"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-sm-7" id="calWith">
+                  <div style="height: 300px" id="chart-content" >
 
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane fade" id="history-record" role="tabpanel" aria-labelledby="chart-tab" style="width: 100%">
+                <div style="margin-top: 10px;margin-left: 10px">
+                  暂无记录哦O(∩_∩)O嗯!O(∩_∩)O嗯!O(∩_∩)O嗯!
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <script th:src="@{/assets/js/user/user-profile.js}"></script>
 </div>
+
+

@@ -33,6 +33,14 @@ public class ArticleController {
     public String add() {
         return "article/article-add";
     }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public Result delete(Integer id) {
+        service.delete(id);
+        return Result.success();
+    }
+
     @GetMapping("/preview.html")
     public String preview(Model model, Integer id) {
         Article article = this.service.detail(id);

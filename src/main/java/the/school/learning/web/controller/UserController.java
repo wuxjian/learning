@@ -3,16 +3,15 @@ package the.school.learning.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import the.school.learning.common.constant.Constant;
 import the.school.learning.common.result.Page;
 import the.school.learning.common.result.Result;
 import the.school.learning.common.utils.UserUtils;
+import the.school.learning.common.vo.ProfileVo;
 import the.school.learning.common.vo.UserRoleVo;
 import the.school.learning.common.vo.UserVo;
 import the.school.learning.service.UserService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -22,8 +21,15 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/profile.html")
-    public String profile(Model model) {
-        model.addAttribute("user", UserUtils.getCurrentUser());
+    public String profile(Model model, @RequestParam(value = "userId", required = false) Integer userId) {
+        UserRoleVo userRoleVo;
+        if (userId == null) {
+            userRoleVo = UserUtils.getCurrentUser();
+        }else {
+            userRoleVo = userService.selectByPrimaryKey(userId);
+        }
+        model.addAttribute("userId", userId);
+        model.addAttribute("user", userRoleVo);
         return "user/user-profile";
     }
 
@@ -42,4 +48,18 @@ public class UserController {
         Page<UserVo> result = this.userService.selectByPage(param);
         return Result.success(result);
     }
+
+    @GetMapping("/profileStatistic")
+    @ResponseBody
+    public Result profileStatistic(@RequestParam(value = "userId", required = false) Integer userId) {
+        ProfileVo profileVo = this.userService.profileStatistic(userId);
+        return Result.success(profileVo);
+    }
+
+    @PostMapping("/toggleStatus")
+    @ResponseBody
+    public Result toggleStatus(Integer userId) {
+        return userService.toggleStatus(userId);
+    }
+
 }

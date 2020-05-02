@@ -24,4 +24,6 @@ public interface UserMapper {
     List<UserVo> selectByPage(@Param("limit") Integer limit, @Param("offset") Integer offset);
 
     int selectCount();
+
+    List<Integer> profileStatistic(Integer userId);
 }

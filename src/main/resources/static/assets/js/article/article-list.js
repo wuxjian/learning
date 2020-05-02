@@ -13,6 +13,21 @@ $(function () {
             }
         })
     });
+
+    //delete
+    $('#articleTable').delegate('.delete', 'click', function () {
+        var id = $(this).parents('tr').attr('data-id');
+        if (confirm("确定要删除吗?")) {
+            $.post('/article/delete', {id: id}, function (res) {
+                if (res.code === 0){
+                    alert("success");
+                    getArticleList(1);
+                }
+            });
+        }
+
+    });
+
     //preview
     $('#articleTable').delegate('.preview', 'click', function () {
         var id = $(this).parents('tr').attr('data-id');
@@ -45,8 +60,7 @@ $(function () {
                             '        <td>'+ (item.status  === '1' ? '草稿' : '已发布')  +'</td>' +
                             '        <td>'+
                                         '<button class="btn btn-primary btn-sm toggle-status">' + action + '</button>' +
-                                        '<button class="btn btn-info btn-sm">编辑</button>' +
-                                        '<button class="btn btn-danger btn-sm">删除</button>' +
+                                        '<button class="btn btn-danger btn-sm delete">删除</button>' +
                                         '<button class="btn btn-success btn-sm preview">预览</button>' +
                                     '</td>' +
                             '      </tr>';

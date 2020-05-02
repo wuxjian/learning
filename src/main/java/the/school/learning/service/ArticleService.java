@@ -18,6 +18,10 @@ public class ArticleService {
         this.articleMapper.insertSelective(article);
     }
 
+    public void delete(Integer id) {
+        this.articleMapper.deleteByPrimaryKey(id);
+    }
+
     public Page<UserVo> selectByPage(Page<UserVo> page) {
         int count = this.articleMapper.selectCount();
         if (count == 0) {
