@@ -1,6 +1,6 @@
 $(function () {
     $('#insert').click(function () {
-        location.hash = 'article/add';
+        location.hash = 'examination/add';
     });
 
     //toggle event
@@ -9,7 +9,7 @@ $(function () {
         $.post('/article/toggleStatus', {id: id}, function (res) {
             if (res.code === 0){
                 alert("success");
-                getArticleList(1);
+                getList(1);
             }
         })
     });
@@ -18,10 +18,10 @@ $(function () {
     $('#articleTable').delegate('.delete', 'click', function () {
         var id = $(this).parents('tr').attr('data-id');
         if (confirm("确定要删除吗?")) {
-            $.post('/article/delete', {id: id}, function (res) {
+            $.post('/examination/delete', {id: id}, function (res) {
                 if (res.code === 0){
                     alert("success");
-                    getArticleList(1);
+                    getList(1);
                 }
             });
         }
@@ -31,7 +31,7 @@ $(function () {
     //preview
     $('#articleTable').delegate('.preview', 'click', function () {
         var id = $(this).parents('tr').attr('data-id');
-        $.get('/article/preview.html?id=' + id, function (res) {
+        $.get('/examination/preview.html?id=' + id, function (res) {
             $('#modal').empty().append(res).modal({
                 showClose: false
             });
@@ -43,25 +43,23 @@ $(function () {
     var page = 1;
 
 
-    getArticleList(page);
-    function getArticleList(currentPage) {
-        $.post('/article/list', {page: currentPage, size: pageSize}, function (res) {
+    getList(page);
+    function getList(currentPage) {
+        $.post('/examination/list', {page: currentPage, size: pageSize}, function (res) {
             if (res.code === 0) {
-                var $tbody =$('#articleTable tbody');
+                var $tbody =$('#examinationTable tbody');
                 $tbody.empty();
                 if (res.data.totalRecord){
                     for (var i = 0; i < res.data.list.length; i++) {
                         var item = res.data.list[i];
-                        var action = item.status === '1' ? "发布": "撤消";
                         var $tr = '<tr data-id="' + item.id + '">' +
                             '        <td>' + (i + 1) + '</td>' +
-                            '        <td>'+ item.title +'</td>' +
-                            '        <td>'+ item.subject +'</td>' +
-                            '        <td>'+ (item.status  === '1' ? '草稿' : '已发布')  +'</td>' +
+                            '        <td>'+ item.examName +'</td>' +
+                            '        <td>'+ item.examScore +'</td>' +
                             '        <td>'+
-                                        '<button class="btn btn-primary btn-sm toggle-status">' + action + '</button>' +
+                                        // '<button class="btn btn-primary btn-sm toggle-status">' + action + '</button>' +
                                         '<button class="btn btn-danger btn-sm delete">删除</button>' +
-                                        '<button class="btn btn-success btn-sm preview">预览</button>' +
+                                        // '<button class="btn btn-success btn-sm preview">预览</button>' +
                                     '</td>' +
                             '      </tr>';
                         $tbody.append($tr);
@@ -87,8 +85,7 @@ $(function () {
             page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>',
             onPageChange: function (num, type) {
                 if( type != 'init'){
-                    page = num;
-                    getArticleList(num);
+                    getList(num);
                 }
             }
         });

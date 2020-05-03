@@ -1,0 +1,24 @@
+<div class="" xmlns:th="http://www.thymeleaf.org">
+  <h3>习题列表</h3>
+  <div style="text-align: right">
+    <button type="button" class="btn btn-success" id="insert">增加</button>
+  </div>
+  <table id="examinationTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+    <tr>
+      <th>序号</th>
+      <th>名称</th>
+      <th>总分</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody> </tbody>
+  </table>
+  <div class="page">
+    <ul id="paginator" class="pagination"></ul>
+  </div>
+
+  <div id="modal" class="modal" style="min-width: 960px;overflow: auto"></div>
+  <script th:src="@{/assets/js/examination/examination-list.js}"></script>
+</div>

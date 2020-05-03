@@ -1,0 +1,40 @@
+<style>
+    #answerWrapper {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    #answerWrapper .item {
+        display: inline-block;
+        padding: 5px;
+    }
+</style>
+
+<div class="" xmlns:th="http://www.thymeleaf.org">
+    <link th:href="@{/assets/lib/wangEditor/wangEditor.min.css}" rel="stylesheet">
+    <h3>新增习题</h3>
+    <div class="col-md-9 col-sm-9 ">
+        <input name="examName" class="form-control" type="text" style="width: 300px" placeholder="请输入名称">
+        <div class="form-control" style="width: 300px">
+            习题数量
+            <select name="examCount" id="examCount">
+            </select>
+        </div>
+        <div class="form-control" style="width: 300px">
+            每题多少分
+            <input name="examPerScore" style="width: 150px" type="number"  placeholder="">
+        </div>
+        <div class="" id="answerWrapper">
+            答案：
+            <div id="answerItems"></div>
+
+
+        </div>
+        <div id="content">
+
+        </div>
+        <button id="submit" type="button" class="btn btn-success" style="width: 300px">提交</button>
+    </div>
+
+    <script th:src="@{/assets/lib/wangEditor/wangEditor.min.js}"></script>
+    <script th:src="@{/assets/js/examination/examination-add.js}"></script>
+</div>

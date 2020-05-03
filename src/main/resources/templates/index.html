@@ -68,8 +68,9 @@
                   </li>
                   <li><a><i class="fa fa-desktop"></i> 在线测评 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
+                      <li th:if="${user.role.role eq '1'}"><a href="#examination/list">习题管理</a></li>
+                      <li><a href="#examination/answer/list">习题测评</a></li>
+                        <li><a href="#examination/record/list">历史成绩</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-laptop"></i> 留言评论 <span class="fa fa-chevron-down"></span></a>

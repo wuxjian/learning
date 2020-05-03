@@ -1,0 +1,57 @@
+<style>
+  #answerWrapper {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  #answerWrapper .item {
+    display: inline-block;
+    padding: 5px;
+  }
+</style>
+
+<div class="" xmlns:th="http://www.thymeleaf.org">
+  <div class="page-title" style="background-color: #fff; border-radius: 5px;color: #000;padding: 0 20px;line-height: 65px">
+    <div class="title_left">
+      <h3>习题评测</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+        <div class="input-group" style="position: relative">
+          <input type="hidden" name="examId" th:value="${exam.id}">
+          <button type="button" id="closeAnswer" class="btn btn-success" style="position: absolute; right: 10px; top: 5px">答题结束</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><span th:text="${exam.examName}" style="color: #000;"></span></h2>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="" id="answerWrapper">
+          填写答案：
+          <div id="answerItems">
+            <span class="item" th:each="item: ${arr}">
+              <span th:text="${item}"></span><input type="text" name="answer" style="width: 30px">
+            </span>
+          </div>
+
+
+        </div>
+
+        <div class="x_content" th:utext="${exam.content}">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script th:src="@{/assets/js/examination/examination-answer.js}"></script>
+</div>

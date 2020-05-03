@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="the.school.learning.mapper.ExaminationMapper">
+  <resultMap id="BaseResultMap" type="the.school.learning.entity.Examination">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="exam_name" jdbcType="VARCHAR" property="examName" />
+    <result column="exam_count" jdbcType="SMALLINT" property="examCount" />
+    <result column="exam_per_score" jdbcType="SMALLINT" property="examPerScore" />
+    <result column="exam_score" jdbcType="SMALLINT" property="examScore" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_on" jdbcType="VARCHAR" property="createOn" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="the.school.learning.entity.Examination">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, exam_name, exam_count, exam_per_score, exam_score, answer, `status`, create_on
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from examination
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from examination
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="the.school.learning.entity.Examination">
+    insert into examination (id, exam_name, exam_count, 
+      exam_per_score, exam_score, answer, 
+      `status`, create_on, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR}, #{examCount,jdbcType=SMALLINT}, 
+      #{examPerScore,jdbcType=SMALLINT}, #{examScore,jdbcType=SMALLINT}, #{answer,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createOn,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="the.school.learning.entity.Examination">
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="examName != null">
+        exam_name,
+      </if>
+      <if test="examCount != null">
+        exam_count,
+      </if>
+      <if test="examPerScore != null">
+        exam_per_score,
+      </if>
+      <if test="examScore != null">
+        exam_score,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="createOn != null">
+        create_on,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examCount != null">
+        #{examCount,jdbcType=SMALLINT},
+      </if>
+      <if test="examPerScore != null">
+        #{examPerScore,jdbcType=SMALLINT},
+      </if>
+      <if test="examScore != null">
+        #{examScore,jdbcType=SMALLINT},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createOn != null">
+        #{createOn,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="the.school.learning.entity.Examination">
+    update examination
+    <set>
+      <if test="examName != null">
+        exam_name = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="examCount != null">
+        exam_count = #{examCount,jdbcType=SMALLINT},
+      </if>
+      <if test="examPerScore != null">
+        exam_per_score = #{examPerScore,jdbcType=SMALLINT},
+      </if>
+      <if test="examScore != null">
+        exam_score = #{examScore,jdbcType=SMALLINT},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createOn != null">
+        create_on = #{createOn,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="the.school.learning.entity.Examination">
+    update examination
+    set exam_name = #{examName,jdbcType=VARCHAR},
+      exam_count = #{examCount,jdbcType=SMALLINT},
+      exam_per_score = #{examPerScore,jdbcType=SMALLINT},
+      exam_score = #{examScore,jdbcType=SMALLINT},
+      answer = #{answer,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      create_on = #{createOn,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="the.school.learning.entity.Examination">
+    update examination
+    set exam_name = #{examName,jdbcType=VARCHAR},
+      exam_count = #{examCount,jdbcType=SMALLINT},
+      exam_per_score = #{examPerScore,jdbcType=SMALLINT},
+      exam_score = #{examScore,jdbcType=SMALLINT},
+      answer = #{answer,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      create_on = #{createOn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectCount" resultType="int">
+    select count(1)
+    from examination
+    where status = '1'
+  </select>
+
+  <select id="selectByPage" resultMap="BaseResultMap">
+    select
+    *
+    from examination
+    where status = '1'
+    order by id desc
+    limit #{limit} offset #{offset}
+  </select>
+
+</mapper>
