@@ -22,13 +22,13 @@ public interface ArticleLearnMapper {
 
     ArticleLearn selectByArticleIdAndUserId(@Param("articleId") Integer articleId, @Param("userId") Integer userId);
 
-    List<ArticleUserVo> selectArticlePage(Integer userId, @Param("limit") Integer limit,
+    List<ArticleUserVo> selectArticlePage(@Param("userId") Integer userId, @Param("limit") Integer limit,
                                           @Param("offset") Integer offset);
 
     int selectCount();
 
     int selectRecordCount(Integer userId);
 
-    List<ArticleLearnRecordVo> selectArticleRecordPage(Integer userId, @Param("limit") Integer limit,
+    List<ArticleLearnRecordVo> selectArticleRecordPage(@Param("userId") Integer userId, @Param("limit") Integer limit,
                                                        @Param("offset") Integer offset);
 }

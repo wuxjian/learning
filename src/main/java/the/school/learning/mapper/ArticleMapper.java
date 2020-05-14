@@ -1,5 +1,6 @@
 package the.school.learning.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import the.school.learning.common.vo.UserVo;
 import the.school.learning.entity.Article;
 
@@ -22,5 +23,5 @@ public interface ArticleMapper {
 
     int selectCount();
 
-    List<UserVo> selectByPage(int limit, int offset);
+    List<UserVo> selectByPage(@Param("limit") int limit, @Param("offset") int offset);
 }
