@@ -25,6 +25,7 @@ public interface ArticleLearnMapper {
     List<ArticleUserVo> selectArticlePage(@Param("userId") Integer userId, @Param("limit") Integer limit,
                                           @Param("offset") Integer offset);
 
+
     int selectCount();
 
     int selectRecordCount(Integer userId);
